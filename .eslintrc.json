@@ -1,0 +1,34 @@
+{
+  "extends": [
+    "standard",
+    "./react.js",
+    "plugin:cypress/recommended"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ],
+    "curly": [
+      "error",
+      "multi",
+      "consistent"
+    ],
+    "no-useless-constructor": "off",
+    "no-var": "error",
+    "prefer-const": "off"
+  }
+}
