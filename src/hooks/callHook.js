@@ -17,9 +17,9 @@ const useCall = ({ selector = state => state } = {}) => {
         data = await callable({ dispatch, actions, state, call, payload })
       else
         throw new Error(`${callable?.name ?? String(callable)} is not a function`)
-    } catch (error) {
-      call(createError, error)
-      return ({ data, error })
+    } catch (err) {
+      call(createError, err)
+      error = err
     }
     dispatch({ type: actions.STOP_LOADING, payload: callable?.name ?? 'undefined' })
     return ({ data, error })
