@@ -6,7 +6,14 @@ const useCall = ({ selector = state => state } = {}) => {
   const dispatch = useDispatch()
   const state = useSelector(selector)
 
-  const call = async(callable, payload = {}) => {
+  const call = async(callable, payload = {}, ms = 20000) => {
+    const timeout = new Promise((resolve, reject) => {
+      let id = setTimeout(() => {
+        clearTimeout(id)
+        reject(new Error(`${callable?.name ?? String(callable)} timed out in ${ms}ms.`))
+      }, ms)
+    })
+
     let error = null
     let data = null
     dispatch({ type: actions.START_LOADING, payload: callable?.name ?? 'undefined' })
@@ -14,7 +21,10 @@ const useCall = ({ selector = state => state } = {}) => {
       console.log(callable?.name ?? 'undefined', payload)
     try {
       if (typeof callable === 'function')
-        data = await callable({ dispatch, actions, state, call, payload })
+        data = await Promise.race([
+          callable({ dispatch, actions, state, call, payload }),
+          timeout,
+        ])
       else
         throw new Error(`${callable?.name ?? String(callable)} is not a function`)
     } catch (err) {
