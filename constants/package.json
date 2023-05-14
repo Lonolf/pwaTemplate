@@ -4,7 +4,6 @@
   "description": "Empty project constants",
   "main": "src/index.ts",
   "devDependencies": {
-    "@types/uuid": "^9.0.1",
     "typescript": "^4.5.5"
   },
   "scripts": {
@@ -17,7 +16,6 @@
   "dependencies": {
     "@nestjs/common": "^9.3.9",
     "date-fns": "^2.28.0",
-    "joi": "^17.7.1",
-    "uuid": "^9.0.0"
+    "joi": "^17.7.1"
   }
 }

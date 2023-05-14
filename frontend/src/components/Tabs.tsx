@@ -1,11 +1,11 @@
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import { Grid } from '@mui/material'
 import React from 'react'
-import { v4 } from 'uuid'
-import { trlb } from '../utilities/translator/translator'
+import uniqid from 'uniqid'
+import { trlb } from '@empty/lib.constants'
 import { DefaultButton, DeleteIconButton, DownloadFileButton } from './Buttons'
-import { DataTable, SectionSubtitle, Space20 } from './Commons'
-import { useDownloadFile } from 'hooks/bucketHooks'
+import { SectionSubtitle, Space20 } from './Commons'
+import { FlexDataTable } from './FlexCommons'
 
 interface FileRow {
   id: string
@@ -46,7 +46,8 @@ export const DocumentsListAndButtonV2 = ({
   }, [initialFiles])
 
   const inputRef = React.useRef(null)
-  const downloadFile = useDownloadFile()
+  // INSTALL: use your own downloadFile function
+  const downloadFile = () => new Promise<Blob>(resolve => resolve(new Blob()))
 
   const handleDownload = async value => {
     const blob = await downloadFile(value.row.id)
@@ -68,7 +69,7 @@ export const DocumentsListAndButtonV2 = ({
     setRows([
       ...rows,
       ...newFilesArray.map(item => ({
-        id: v4() + item.name,
+        id: uniqid() + item.name,
         name: item.name,
         notUploaded: true,
       })),
@@ -133,7 +134,7 @@ export const DocumentsListAndButtonV2 = ({
       ) : null}
       <SectionSubtitle text={trlb('uploaded_documents')} />
 
-      <DataTable {...{ rows, columns }} background={background} height='30vh' />
+      <FlexDataTable {...{ rows, columns }} background={background} height='30vh' />
     </Grid>
   )
 }
