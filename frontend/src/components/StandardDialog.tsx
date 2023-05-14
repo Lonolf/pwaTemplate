@@ -1,8 +1,7 @@
 import React, { CSSProperties } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography, useTheme } from '@mui/material'
-import { trlb } from 'utilities'
+import { trlb } from '@empty/lib.constants'
 import { Check, Clear } from '@mui/icons-material'
-import { SectionTitle } from './Commons'
 
 const StandardDialog = ({
   open = false,

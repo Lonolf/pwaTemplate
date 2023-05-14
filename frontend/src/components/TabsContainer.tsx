@@ -16,13 +16,7 @@ const TabsContainer = ({
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        textColor="primary"
-        indicatorColor="primary"
-        centered
-      >
+      <Tabs value={value} onChange={handleChange} textColor='primary' indicatorColor='primary' centered>
         {tabs.map(tab => (
           <Tab key={tab} value={tab} label={tab} sx={{ fontWeight: '600' }} />
         ))}

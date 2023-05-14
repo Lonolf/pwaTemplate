@@ -173,11 +173,7 @@ theme = createTheme(theme, {
 } as any)
 
 // TODO find out why it was necessary to provide `children` as a generic argument, it should be injected by React.FC
-export const ThemeProvider = ({
-  children,
-}: {
-  children: ReactNode | ReactNode[]
-}) => {
+export const ThemeProvider = ({ children }: { children: ReactNode | ReactNode[] }) => {
   return (
     <MUIThemeProvider theme={theme}>
       <CssBaseline />

@@ -1,16 +1,15 @@
 import React from 'react'
 import AuthLayout from 'layouts/AuthLayout'
 import { Box, Button, TextField } from '@mui/material'
-import logo from '../../../assets/img/logo.png'
+import logo from 'assets/img/logo.png'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useResetPassword } from 'hooks'
 import { useLocation } from 'react-router-dom'
 import { trlb } from 'utilities'
+import { useResetPassword } from 'hooks/authHooks'
 
 export const ResetPasswordSchema = Yup.object().shape({
-  password: Yup
-    .string()
+  password: Yup.string()
     .required('resetPassword_password_required')
     .matches(
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.,_]).{8,}$/,
@@ -18,10 +17,7 @@ export const ResetPasswordSchema = Yup.object().shape({
     ),
   confirm: Yup.string()
     .required('resetPassword_confirm_required')
-    .oneOf(
-      [Yup.ref('password')],
-      'resetPassword_passwordsDoNotMatch_error',
-    )
+    .oneOf([Yup.ref('password')], 'resetPassword_passwordsDoNotMatch_error')
     .matches(
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.,_]).{8,}$/,
       'resetPassword_minimumRequirements_error',
@@ -33,7 +29,7 @@ const ResetPassword = () => {
   const resetPassword = useResetPassword()
 
   // @ts-ignore
-  const onSubmit = async(values: { password: string }) => {
+  const onSubmit = async (values: { password: string }) => {
     const params = location.search.slice(1).split('=')
     const token = params ? params[1] : ''
 
@@ -55,16 +51,16 @@ const ResetPassword = () => {
 
   return (
     <AuthLayout>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4}}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
         <img src={logo} width={160} />
       </Box>
 
       <form onSubmit={form.handleSubmit}>
         <Box sx={{ mb: 4 }}>
           <TextField
-            type="password"
-            label="Password"
-            variant="outlined"
+            type='password'
+            label='Password'
+            variant='outlined'
             sx={{ width: '100%' }}
             error={form.dirty && !!form.errors.password}
             helperText={form.dirty && trlb(form.errors.password ?? '')}
@@ -74,22 +70,17 @@ const ResetPassword = () => {
 
         <Box sx={{ mb: 4 }}>
           <TextField
-            type="password"
-            label="Confirm"
-            variant="outlined"
+            type='password'
+            label='Confirm'
+            variant='outlined'
             sx={{ width: '100%' }}
             error={form.dirty && !!form.errors.confirm}
             helperText={form.dirty && trlb(form.errors.confirm ?? '')}
             {...form.getFieldProps('confirm')}
           />
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center', align: 'items-center'}} mb={1}>
-          <Button
-            color="primary"
-            variant="contained"
-            type="submit"
-            disabled={form.isSubmitting || !form.isValid}
-          >
+        <Box sx={{ display: 'flex', justifyContent: 'center', align: 'items-center' }} mb={1}>
+          <Button color='primary' variant='contained' type='submit' disabled={form.isSubmitting || !form.isValid}>
             {trlb('resetPassword_button')}
           </Button>
         </Box>

@@ -1,23 +1,15 @@
-import { AuthApi, UsersApi } from 'api'
-import { PermissionsApi } from 'api/permissions.api'
-import { ACCESS_TOKEN } from 'config/constant'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router'
 import { routes } from 'routes/routes'
 import { AUTH_ACTION, GLOBAL_ACTION } from 'store/actions'
-import { useGetWeekCases } from './caseshooks'
-import { useGetSystemConfiguration } from './systemConfigurationHooks'
 import useCall from './useCall'
-import { useGetOperatingRooms } from './roomsHooks'
-import { ToastType } from '@empty/lib.constants'
+import { STORAGE_STRING } from '@empty/lib.constants'
 
 export const useLogin = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const call = useCall()
-  const getOperatingRooms = useGetOperatingRooms()
-  const getSystemConfiguration = useGetSystemConfiguration()
 
   interface loginProps {
     email: string
@@ -26,7 +18,11 @@ export const useLogin = () => {
 
   return (data: loginProps) =>
     call(async function login() {
-      const res = await AuthApi.login(data)
+      // INSTALL: Replace this with your own login API
+      const res = {
+        accessToken: '123',
+        message: 'login_success',
+      }
 
       if (res.accessToken) {
         dispatch({
@@ -34,9 +30,7 @@ export const useLogin = () => {
           data: res,
         })
 
-        localStorage.setItem(ACCESS_TOKEN, res.accessToken)
-        getSystemConfiguration()
-        getOperatingRooms()
+        localStorage.setItem(STORAGE_STRING, res.accessToken)
         navigate(routes.home)
         return true
       } else {
@@ -56,9 +50,10 @@ export const useLogout = () => {
 
   return (noRedirect?: boolean) =>
     call(async function logout() {
-      await AuthApi.logout()
+      // INSTALL: Replace this with your own logout API
+      // await AuthApi.logout()
       dispatch({ type: AUTH_ACTION.LOG_OUT })
-      localStorage.removeItem(ACCESS_TOKEN)
+      localStorage.removeItem(STORAGE_STRING)
       window.location.reload()
       if (!noRedirect) navigate(routes.login)
     })
@@ -67,22 +62,16 @@ export const useLogout = () => {
 export const useGetCurrentUser = () => {
   const dispatch = useDispatch()
   const call = useCall()
-  const getWeekCases = useGetWeekCases()
-  const getOperatingRooms = useGetOperatingRooms()
-  const getSystemConfiguration = useGetSystemConfiguration()
 
   return () =>
     call(async function getCurrentUser() {
-      const accessToken = localStorage.getItem(ACCESS_TOKEN)
+      const accessToken = localStorage.getItem(STORAGE_STRING)
 
       if (!accessToken) return null
 
-      const res = await UsersApi.getCurrentUser()
+      // INSTALL: Replace this with your own getCurrentUser API
+      const res = {}
       dispatch({ type: AUTH_ACTION.GET_CURRENT_USER_SUCCESS, data: res })
-
-      getWeekCases(new Date())
-      getOperatingRooms()
-      getSystemConfiguration()
 
       return res
     })
@@ -120,7 +109,8 @@ export const useResetPassword = () => {
 
   return (data: resetPasswordProps) =>
     call(async function resetPassword() {
-      const res = await AuthApi.resetPassword(data)
+      // INSTALL: Replace this with your own resetPassword API
+      const res = true
       if (res === true) {
         dispatch({
           type: GLOBAL_ACTION.ADD_TOAST,
@@ -143,7 +133,8 @@ export const useForgotPassword = () => {
 
   return (data: forgotPasswordProps) =>
     call(async function forgotPassword() {
-      await AuthApi.forgotPassword(data)
+      // INSTALL: Replace this with your own forgotPassword API
+      // await AuthApi.forgotPassword(data)
       dispatch({
         type: GLOBAL_ACTION.ADD_TOAST,
         data: { text: 'forgot_password_success', type: 'success' },
@@ -161,7 +152,8 @@ export const useResendVerificationEmail = () => {
 
   return (data: resendVerificationEmailProps) =>
     call(async function resendVerificationEmail() {
-      await AuthApi.resendVerificationEmail(data)
+      // INSTALL: Replace this with your own resendVerificationEmail API
+      // await AuthApi.resendVerificationEmail(data)
       dispatch({
         type: GLOBAL_ACTION.ADD_TOAST,
         data: { text: 'verify_email_success', type: 'success' },
@@ -181,23 +173,25 @@ export const useVerifyEmail = () => {
       const token = params ? params[1] : ''
 
       if (token)
-        AuthApi.verifyEmail(token)
-          .then(res => {
-            setIsVerified(true)
-            dispatch({
-              type: GLOBAL_ACTION.ADD_TOAST,
-              data: { type: ToastType.success, text: 'login_emailVerified_success' },
-            })
-          })
-          .catch(err => {
-            console.log(err)
-            setIsVerified(false)
-            dispatch({
-              type: GLOBAL_ACTION.ADD_TOAST,
-              data: { type: ToastType.error, text: 'login_emailVerified_error' },
-            })
-          })
-      else setIsVerified(null)
+        // INSTALL: Replace this with your own verifyEmail API
+        //   AuthApi.verifyEmail(token)
+        //     .then(res => {
+        //       setIsVerified(true)
+        //       dispatch({
+        //         type: GLOBAL_ACTION.ADD_TOAST,
+        //         data: { type: ToastType.success, text: 'login_emailVerified_success' },
+        //       })
+        //     })
+        //     .catch(err => {
+        //       console.log(err)
+        //       setIsVerified(false)
+        //       dispatch({
+        //         type: GLOBAL_ACTION.ADD_TOAST,
+        //         data: { type: ToastType.error, text: 'login_emailVerified_error' },
+        //       })
+        //     })
+        // else setIsVerified(null)
+        return true
     })
   }, [location])
 

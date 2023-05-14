@@ -11,9 +11,7 @@ export const useCall = () => {
 
   const call = async (callable: any) => {
     let data = null
-    const functionId = `${callable?.name || 'No name given'} - ${Math.random()
-      .toString(36)
-      .substring(7)}`
+    const functionId = `${callable?.name || 'No name given'} - ${Math.random().toString(36).substring(7)}`
     dispatch({ type: GLOBAL_ACTION.START_LOADING, data: functionId })
 
     if (!import.meta.env.PROD) {
@@ -27,10 +25,7 @@ export const useCall = () => {
 
     try {
       if (typeof callable === 'function') data = await callable()
-      else
-        throw new Error(
-          `${callable?.name ?? String(callable)} is not a function`,
-        )
+      else throw new Error(`${callable?.name ?? String(callable)} is not a function`)
     } catch (error) {
       createError(error)
       data = { error }

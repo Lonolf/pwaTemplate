@@ -1,8 +1,7 @@
 import React, { Component, FC } from 'react'
 import ComponentError from './ComponentError'
-// import * as actions from '../redux/state/actions'
 
-const withErrorBoundary = (WrappedComponent: FC<any>) => (
+const withErrorBoundary = (WrappedComponent: FC<any>) =>
   class extends Component<any, { error: Error | null }> {
     constructor(props: any) {
       super(props)
@@ -19,14 +18,10 @@ const withErrorBoundary = (WrappedComponent: FC<any>) => (
     }
 
     render() {
-      if (this.state.error)
-        return (
-          <ComponentError {...{ error: this.state.error }} />
-        )
+      if (this.state.error) return <ComponentError {...{ error: this.state.error }} />
 
       return <WrappedComponent {...this.props} />
     }
   }
-)
 
 export default withErrorBoundary

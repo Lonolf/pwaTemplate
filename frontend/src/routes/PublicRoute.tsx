@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom'
 import { useAppSelector } from 'store'
 import AuthLayout from 'layouts/AuthLayout'
 import { Outlet } from '@mui/icons-material'
+import { routes } from './routes'
 
 const PublicRoute: React.FC<any> = () => {
   const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated)
@@ -12,7 +13,7 @@ const PublicRoute: React.FC<any> = () => {
       <Outlet />
     </AuthLayout>
   ) : (
-    <Navigate to="/" />
+    <Navigate to={routes.home} />
   )
 }
 

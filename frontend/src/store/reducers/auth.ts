@@ -1,16 +1,13 @@
-import { UserPermissions } from '@empty/lib.constants'
 import { AUTH_ACTION } from 'store/actions'
 
 export interface AuthState {
   isAuthenticated: boolean
   user: any
-  permissions: UserPermissions
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
   user: undefined,
-  permissions: {} as UserPermissions,
 }
 
 export default function reducer(state = initialState, action: any) {
@@ -36,11 +33,6 @@ export default function reducer(state = initialState, action: any) {
       return {
         ...state,
         isAuthenticated: false,
-      }
-    case AUTH_ACTION.GET_PERMISSIONS_SUCCESS:
-      return {
-        ...state,
-        permissions: action.data,
       }
     default:
       return state

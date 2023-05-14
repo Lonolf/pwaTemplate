@@ -2,7 +2,7 @@ import React from 'react'
 import { useAppSelector } from 'store'
 import { Alert, AlertTitle, IconButton, useTheme } from '@mui/material'
 import { CancelOutlined } from '@mui/icons-material'
-import { trlb } from 'utilities'
+import { trlb } from '@empty/lib.constants'
 import { GLOBAL_ACTION } from 'store/actions'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
@@ -55,9 +55,7 @@ const Toasts = () => {
 
   const handleClickToast = () => {
     removeToast()
-    if (!!toast.targetPath) {
-      navigate(toast.targetPath)
-    }
+    if (toast.targetPath) navigate(toast.targetPath)
   }
 
   return (
@@ -79,11 +77,7 @@ const Toasts = () => {
       onClose={() => removeToast()}
       style={{ backgroundColor, color }}
       action={
-        <IconButton
-          onClick={() => removeToast()}
-          size="small"
-          aria-label="close"
-        >
+        <IconButton onClick={() => removeToast()} size='small' aria-label='close'>
           <CancelOutlined style={{ fill: color }} />
         </IconButton>
       }

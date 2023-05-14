@@ -1,13 +1,5 @@
 import React from 'react'
-import {
-  Toolbar,
-  Button,
-  Typography,
-  IconButton,
-  Box,
-  Menu,
-  MenuItem,
-} from '@mui/material'
+import { Toolbar, Button, Typography, IconButton, Box, Menu, MenuItem } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -16,6 +8,7 @@ import { setAppLanguage, getLanguage } from '@empty/lib.constants'
 import { AUTH_ACTION } from 'store/actions'
 import { useDispatch } from 'react-redux'
 import { useLogout } from 'hooks/authHooks'
+import logo from 'assets/img/logo.png'
 
 interface HeaderProps {
   menuOpen?: boolean
@@ -51,17 +44,13 @@ const Header = ({ menuOpen, setMenuOpen }: HeaderProps) => {
   }
 
   return (
-    <AppBar
-      position="fixed"
-      open={menuOpen}
-      sx={{ bgcolor: 'background.paper' }}
-    >
+    <AppBar position='fixed' open={menuOpen} sx={{ bgcolor: 'background.paper' }}>
       <Toolbar sx={{ gap: 1, justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', gep: 1, alignItems: 'center' }}>
           <IconButton
-            aria-label="open drawer"
+            aria-label='open drawer'
             onClick={() => setMenuOpen(!menuOpen)}
-            edge="start"
+            edge='start'
             sx={{
               marginRight: 5,
             }}
@@ -71,19 +60,10 @@ const Header = ({ menuOpen, setMenuOpen }: HeaderProps) => {
           <img src={logo} style={{ width: 100 }} />
         </Box>
         <Box sx={{ display: 'flex' }}>
-          <Button
-            onClick={handleClick}
-            sx={{ marginRight: '5%' }}
-            variant="text"
-          >
+          <Button onClick={handleClick} sx={{ marginRight: '5%' }} variant='text'>
             <Typography sx={{ marginRight: '15%' }}>{getLanguage()}</Typography>
           </Button>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-          >
+          <Menu id='basic-menu' anchorEl={anchorEl} open={open} onClose={handleClose}>
             <MenuItem
               onClick={() => {
                 dispatch({ type: AUTH_ACTION.SET_LANG })
@@ -103,11 +83,7 @@ const Header = ({ menuOpen, setMenuOpen }: HeaderProps) => {
               DE
             </MenuItem>
           </Menu>
-          <IconButton
-            aria-label="open drawer"
-            onClick={logout as any}
-            edge="start"
-          >
+          <IconButton aria-label='open drawer' onClick={logout as any} edge='start'>
             <LogoutOutlined />
           </IconButton>
         </Box>

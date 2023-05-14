@@ -32,9 +32,7 @@ export default function reducer(state = initialState, action: any) {
     case GLOBAL_ACTION.REMOVE_TOAST:
       return {
         ...state,
-        toasts: state.toasts.filter(
-          (item: IToast) => item.id !== action.data.id,
-        ),
+        toasts: state.toasts.filter((item: IToast) => item.id !== action.data.id),
       }
     default:
       return state

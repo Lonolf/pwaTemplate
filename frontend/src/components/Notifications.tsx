@@ -1,12 +1,4 @@
-import {
-  Box,
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from '@mui/material'
+import { Box, Divider, Drawer, List, ListItem, ListItemText, Typography } from '@mui/material'
 import { format } from 'date-fns'
 import React from 'react'
 import { DrawerHeader } from './MenuDrawer'
@@ -36,11 +28,7 @@ const NotificationsDrawer = ({
   setNotificationsOpen: (value: boolean) => void
 }) => {
   return (
-    <Drawer
-      anchor="right"
-      open={notificationsOpen}
-      onClose={() => setNotificationsOpen(false)}
-    >
+    <Drawer anchor='right' open={notificationsOpen} onClose={() => setNotificationsOpen(false)}>
       <DrawerHeader />
       <List sx={{ maxWidth: 250 }}>
         {notificationsExample.map((notification, index) => (
@@ -49,19 +37,15 @@ const NotificationsDrawer = ({
               button
               key={notification.id}
               sx={{
-                backgroundColor: theme =>
-                  notification.read ? theme.palette.panel.main : 'inherit',
+                backgroundColor: theme => (notification.read ? theme.palette.panel.main : 'inherit'),
                 position: 'relative',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'flex-start',
               }}
             >
-              <ListItemText
-                primary={notification.title}
-                secondary={notification.text}
-              />
-              <Typography variant="caption" color="textSecondary">
+              <ListItemText primary={notification.title} secondary={notification.text} />
+              <Typography variant='caption' color='textSecondary'>
                 {format(notification.timestamp, 'HH:mm')}
               </Typography>
               <NotificationDot />

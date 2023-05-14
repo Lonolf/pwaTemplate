@@ -3,7 +3,7 @@ import AuthLayout from 'layouts/AuthLayout'
 import { Button, Typography, Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { trlb } from '@empty/lib.constants'
-import logo from '../../../assets/img/logo.png'
+import logo from 'assets/img/logo.png'
 import { routes } from 'routes/routes'
 import { useVerifyEmail } from 'hooks/authHooks'
 
@@ -20,7 +20,8 @@ const VerifyEmail = () => {
         <Typography align='center' variant='h4'>
           {trlb('login_verifyingEmail')}
         </Typography>
-      ) : isVerified === true ? (
+      ) : null}
+      {isVerified === true ? (
         <Typography align='center' variant='h4'>
           {trlb('login_emailVerified_success')}
         </Typography>

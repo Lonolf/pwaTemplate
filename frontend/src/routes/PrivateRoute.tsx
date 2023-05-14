@@ -6,6 +6,7 @@ import Menubar from 'components/Header'
 import MenuDrawer, { DrawerHeader } from 'components/MenuDrawer'
 import NotificationsDrawer from 'components/Notifications'
 import { Box } from '@mui/material'
+import { routes } from './routes'
 
 const PrivateRoute: React.FC<any> = () => {
   const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated)
@@ -14,9 +15,7 @@ const PrivateRoute: React.FC<any> = () => {
 
   return isAuthenticated ? (
     <>
-      <Menubar
-        {...{ menuOpen, setMenuOpen, notificationsOpen, setNotificationsOpen }}
-      />
+      <Menubar {...{ menuOpen, setMenuOpen, notificationsOpen, setNotificationsOpen }} />
       <MenuDrawer {...{ menuOpen, setMenuOpen }} />
       <NotificationsDrawer {...{ notificationsOpen, setNotificationsOpen }} />
       <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -25,7 +24,7 @@ const PrivateRoute: React.FC<any> = () => {
       </Box>
     </>
   ) : (
-    <Navigate to="/auth/login" />
+    <Navigate to={routes.login} />
   )
 }
 

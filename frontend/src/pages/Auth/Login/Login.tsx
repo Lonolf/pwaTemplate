@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AuthLayout from 'layouts/AuthLayout'
 import { Box, Button, TextField, Typography } from '@mui/material'
-import logo from '../../../assets/img/logo.png'
+import logo from 'assets/img/logo.png'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useForgotPassword, useLogin, useResendVerificationEmail } from 'hooks'
@@ -13,9 +13,7 @@ import { useAppSelector } from 'store'
 import { useNavigate } from 'react-router'
 
 export const LoginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Wrong email format')
-    .required(trlb('commons_email_required')),
+  email: Yup.string().email('Wrong email format').required(trlb('commons_email_required')),
   password: Yup.string().required(trlb('commons_password_required')),
 })
 
@@ -36,11 +34,9 @@ const Login = () => {
     else navigate(routes.home)
   }
 
-  const onForgotPasswordSubmit = async (values: { email: string }) =>
-    forgotPassword({ email: values.email })
+  const onForgotPasswordSubmit = async (values: { email: string }) => forgotPassword({ email: values.email })
 
-  const onResendVerificationEmail = async (values: any) =>
-    resendVerificationEmail(values.email)
+  const onResendVerificationEmail = async (values: any) => resendVerificationEmail(values.email)
 
   const handleError = (err: string) => {
     if (err === 'error_userNotVerified') setShowVerifyModal(true)
@@ -74,7 +70,7 @@ const Login = () => {
         <Box sx={{ mb: 4 }}>
           <TextField
             label={trlb('patientForm_Email')}
-            variant="outlined"
+            variant='outlined'
             sx={{ width: '100%' }}
             error={!!form.errors.email && !!form.touched.email}
             helperText={form.errors.email}
@@ -84,9 +80,9 @@ const Login = () => {
 
         <Box sx={{ mb: 4 }}>
           <TextField
-            type="password"
+            type='password'
             label={trlb('password')}
-            variant="outlined"
+            variant='outlined'
             sx={{ width: '100%' }}
             error={!!form.errors.password && !!form.touched.password}
             helperText={form.errors.password}
@@ -102,10 +98,10 @@ const Login = () => {
           mb={1}
         >
           <Button
-            color="primary"
-            variant="contained"
+            color='primary'
+            variant='contained'
             sx={{ width: 120 }}
-            type="submit"
+            type='submit'
             disabled={form.isSubmitting || !form.isValid || error}
           >
             {trlb('login')}
@@ -121,12 +117,10 @@ const Login = () => {
         >
           <Button
             onClick={() => onForgotPasswordSubmit(form.values)}
-            variant="text"
-            disabled={
-              form.isSubmitting || !form.values.email || !!form.errors.email
-            }
+            variant='text'
+            disabled={form.isSubmitting || !form.values.email || !!form.errors.email}
           >
-            <Typography sx={{ fontSize: 14 }} align="center">
+            <Typography sx={{ fontSize: 14 }} align='center'>
               {trlb('forgot_password')}
             </Typography>
           </Button>
@@ -137,10 +131,7 @@ const Login = () => {
         onClose={() => setShowVerifyModal(false)}
         onRetry={() => onResendVerificationEmail(form.values)}
       />
-      <ActivateModal
-        open={showActivateModal}
-        onClose={() => setShowActivateModal(false)}
-      />
+      <ActivateModal open={showActivateModal} onClose={() => setShowActivateModal(false)} />
     </AuthLayout>
   )
 }

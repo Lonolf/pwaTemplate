@@ -277,12 +277,10 @@ export const FlexPatientCases = ({ patientCases }: { patientCases: Case[] }) => 
             <Box sx={{ padding: '15px 15px' }}>
               <Typography variant='button'>{trlb('surgery_name')}</Typography>
               <Typography>
-                {
-                  getCaseContract({
-                    caseForm: patientCase,
-                    contracts,
-                  })?.opStandards?.[patientCase?.bookingSection?.opStandardId ?? '']?.name ?? ''
-                }
+                {getCaseContract({
+                  caseForm: patientCase,
+                  contracts,
+                })?.opStandards?.[patientCase?.bookingSection?.opStandardId ?? '']?.name ?? ''}
               </Typography>
             </Box>
             <Divider orientation='vertical' variant='middle' flexItem />
