@@ -6,11 +6,11 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { routes } from 'routes/routes'
-import { trlb } from '@empty/lib.constants'
+import { DRAWER_WIDTH, trlb } from '@empty/lib.constants'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
+  width: DRAWER_WIDTH,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -43,7 +43,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: prop => prop !== 'open',
 })(({ theme, open }) => ({
-  width: drawerWidth,
+  width: DRAWER_WIDTH,
   flexShrink: 0,
   boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
   whiteSpace: 'nowrap',
@@ -77,10 +77,10 @@ const MenuDrawer = ({ menuOpen, setMenuOpen }: MenuDrawerProps) => {
 
   const menuItems: (MenuItem | null)[] = [
     {
-          route: routes.home,
-          Icon: DashboardOutlinedIcon,
-        },
-      ]
+      route: routes.home,
+      Icon: DashboardOutlinedIcon,
+    },
+  ]
 
   const onClick = (menuItem: MenuItem | null) => {
     if (menuItem?.route) navigate(menuItem.route)

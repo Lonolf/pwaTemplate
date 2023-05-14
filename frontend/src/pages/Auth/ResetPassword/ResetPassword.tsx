@@ -5,7 +5,7 @@ import logo from 'assets/img/logo.png'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useLocation } from 'react-router-dom'
-import { trlb } from 'utilities'
+import { trlb } from '@empty/lib.constants'
 import { useResetPassword } from 'hooks/authHooks'
 
 export const ResetPasswordSchema = Yup.object().shape({

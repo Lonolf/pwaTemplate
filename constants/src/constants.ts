@@ -5,3 +5,4 @@ export const phoneRegex = /^\+?(\d\s*-?\s*)*\d\s*$/
 
 // INSTALL
 export const STORAGE_STRING = 'storageString'
+export const DRAWER_WIDTH = 240

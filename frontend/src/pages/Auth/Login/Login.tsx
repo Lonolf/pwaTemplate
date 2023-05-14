@@ -4,13 +4,13 @@ import { Box, Button, TextField, Typography } from '@mui/material'
 import logo from 'assets/img/logo.png'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useForgotPassword, useLogin, useResendVerificationEmail } from 'hooks'
 import { routes } from 'routes/routes'
-import VerifyModal from 'components/pages/Login/VerifyModal'
-import ActivateModal from 'components/pages/Login/ActivateModal'
-import { trlb } from '../../../utilities/translator/translator'
+import VerifyModal from './components/VerifyModal'
+import ActivateModal from './components/ActivateModal'
+import { trlb } from '@empty/lib.constants'
 import { useAppSelector } from 'store'
 import { useNavigate } from 'react-router'
+import { useForgotPassword, useLogin, useResendVerificationEmail } from 'hooks/authHooks'
 
 export const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Wrong email format').required(trlb('commons_email_required')),
