@@ -4,19 +4,21 @@ import { routes } from 'routes/routes'
 
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'store'
+import { trlb } from '@empty/lib.constants'
 
 const ForbiddenPage = ({ noRedirect }: { noRedirect?: boolean }) => {
   const navigate = useNavigate()
   const isLoading = useAppSelector(state => state.global.loading.length)
+
   React.useEffect(() => {
-    if (!noRedirect && !isLoading) navigate(routes.dashboard)
+    if (!noRedirect && !isLoading) navigate(routes.home)
   }, [navigate, isLoading, noRedirect])
 
   if (isLoading) return null
   return (
     <PageContainer>
       <PageHeader pageTitle='Forbidden'></PageHeader>
-      Forbidden
+      {trlb('commons_forbidden')}
     </PageContainer>
   )
 }

@@ -5,23 +5,17 @@ import logo from 'assets/img/logo.png'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useLocation } from 'react-router-dom'
-import { trlb } from '@empty/lib.constants'
+import { passwordRegex, trlb } from '@empty/lib.constants'
 import { useResetPassword } from 'hooks/authHooks'
 
 export const ResetPasswordSchema = Yup.object().shape({
   password: Yup.string()
     .required('resetPassword_password_required')
-    .matches(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.,_]).{8,}$/,
-      'resetPassword_minimumRequirements_error',
-    ),
+    .matches(passwordRegex, 'resetPassword_minimumRequirements_error'),
   confirm: Yup.string()
     .required('resetPassword_confirm_required')
     .oneOf([Yup.ref('password')], 'resetPassword_passwordsDoNotMatch_error')
-    .matches(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.,_]).{8,}$/,
-      'resetPassword_minimumRequirements_error',
-    ),
+    .matches(passwordRegex, 'resetPassword_minimumRequirements_error'),
 })
 
 const ResetPassword = () => {
