@@ -1,4 +1,3 @@
-import { BadRequestException } from '@nestjs/common'
 import { IUser } from '../types'
 
 export class LoginRequestDto {
@@ -13,12 +12,6 @@ export class LoginResponseDto {
 
 export interface ValidationError {
   [key: string]: ValidationError | string[]
-}
-
-export class ValidationException extends BadRequestException {
-  constructor(public validationErrors: ValidationError) {
-    super()
-  }
 }
 
 export class ErrorDto {

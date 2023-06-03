@@ -10,3 +10,7 @@ There are two main folders in the application:
     - Translations
     - Formatters
   - Frontend is the main React/PWA application
+
+To start a new project search and replace:
+- the comment "// INSTALLATION"
+- the world "empty"
