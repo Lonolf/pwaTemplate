@@ -57,7 +57,7 @@ const Header = ({ menuOpen, setMenuOpen }: HeaderProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <img src={logo} style={{ width: 100 }} />
+          <img src={logo} style={{ width: 64 }} />
         </Box>
         <Box sx={{ display: 'flex' }}>
           <Button onClick={handleClick} sx={{ marginRight: '5%' }} variant='text'>

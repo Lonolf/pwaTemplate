@@ -2,6 +2,8 @@ import { createTheme } from '@mui/material/styles'
 import { ThemeProvider as MUIThemeProvider, CssBaseline } from '@mui/material'
 import React, { ReactNode } from 'react'
 
+// INSTALLATION: https://mui.com/customization/default-theme/#main-content
+
 declare module '@mui/material/styles/createPalette' {
   export interface Palette {
     customColors: {
